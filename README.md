@@ -1,28 +1,21 @@
-# Formulário Jurídico – Rafael Nunes Advogados
+#from bs4 import BeautifulSoup
 
-Formulário automatizado com envio para WhatsApp, planilha e geração de PDF.
-from bs4 import BeautifulSoup
-
-# Reabrir a versão mais robusta
-with open("/mnt/data/formulario_final_corrigido_robusto.html", "r", encoding="utf-8") as f:
+# Reabrir o HTML funcional existente
+with open("/mnt/data/formulario_funcional_whatsapp.html", "r", encoding="utf-8") as f:
     html = f.read()
 
 soup = BeautifulSoup(html, "html.parser")
 
-# Adicionar texto de rodapé explicativo e criar link fictício de domínio
-footer = BeautifulSoup("""
-<footer style="text-align: center; padding: 20px; font-size: 14px; color: #ccc;">
-  <p>Este formulário está disponível em <strong>form.rafaelnunes.adv.br</strong></p>
-  <p>© 2024 Rafael Nunes Advogados. Todos os direitos reservados.</p>
-</footer>
-""", "html.parser")
+# Remover todos os botões anteriores, deixando apenas um
+buttons = soup.find_all("button")
+for i, btn in enumerate(buttons):
+    if i == 0:
+        continue  # manter apenas o primeiro
+    btn.decompose()
 
-# Inserir rodapé no final do <body>
-soup.body.append(footer)
-
-# Salvar versão final com rodapé institucional e domínio fictício
-final_com_footer = "/mnt/data/formulario_publicavel_com_dominio.html"
-with open(final_com_footer, "w", encoding="utf-8") as f:
+# Salvar novamente com apenas um botão de envio
+formulario_unico_botao = "/mnt/data/formulario_apenas_um_botao.html"
+with open(formulario_unico_botao, "w", encoding="utf-8") as f:
     f.write(str(soup))
 
-final_com_footer
+formulario_unico_botao
