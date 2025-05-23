@@ -1,2 +1,3 @@
-# formulario-triagem
-Formulário jurídico online – Rafael Nunes Advogados
+# Formulário Jurídico – Rafael Nunes Advogados
+
+Formulário automatizado com envio para WhatsApp, planilha e geração de PDF.
